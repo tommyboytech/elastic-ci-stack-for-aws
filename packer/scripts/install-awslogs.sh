@@ -15,3 +15,4 @@ sudo python /tmp/awslogs-agent-setup.py --region us-west-2 --dependency-path /tm
 
 echo "Configure awslogsd to run on startup..."
 sudo systemctl enable awslogs.service
+

@@ -39,7 +39,7 @@ region = $AWS_REGION
 EOF
 
 # Start logging daemons as soon as possible to ensure failures in this script get sent
-systemctl start awslogsd
+systemctl start awslogs
 systemctl start journald-cloudwatch-logs
 
 PLUGINS_ENABLED=()
