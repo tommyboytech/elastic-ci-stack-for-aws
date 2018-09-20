@@ -2,18 +2,20 @@
 set -eu -o pipefail
 
 echo "Updating core packages"
-sudo yum update -y
+sudo apt-get update
+sudo apt-get -y upgrade
 
 echo "Updating awscli..."
-sudo yum install -y python2-pip
+sudo apt-get update
+sudo apt-get install -y python-pip
+sudo pip install --upgrade pip
 sudo pip install --upgrade awscli
 
 echo "Installing zip utils..."
-sudo yum update -y -q
-sudo yum install -y zip unzip
+sudo apt-get install -y zip unzip
 
 echo "Installing bats..."
-sudo yum install -y git
+sudo apt-get install -y git
 sudo git clone https://github.com/sstephenson/bats.git /tmp/bats
 sudo /tmp/bats/install.sh /usr/local
 

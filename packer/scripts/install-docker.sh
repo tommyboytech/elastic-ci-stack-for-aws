@@ -9,7 +9,7 @@ DOCKER_COMPOSE_VERSION=1.21.1
 
 # Add docker group
 sudo groupadd docker
-sudo usermod -a -G docker ec2-user
+sudo usermod -a -G docker ubuntu
 
 # Manual install ala https://docs.docker.com/engine/installation/binaries/
 curl -Lsf -o docker.tgz https://download.docker.com/linux/static/${DOCKER_RELEASE}/x86_64/docker-${DOCKER_VERSION}.tgz
@@ -22,7 +22,7 @@ sudo cp /tmp/conf/docker/daemon.json /etc/docker/daemon.json
 sudo cp /tmp/conf/docker/daemon.userns-remap.json /etc/docker/daemon.userns-remap.json
 sudo cp /tmp/conf/docker/subuid /etc/subuid
 sudo cp /tmp/conf/docker/subgid /etc/subgid
-sudo chown -R ec2-user:docker /etc/docker
+sudo chown -R ubuntu:docker /etc/docker
 
 # Install systemd services
 echo "Installing systemd services"
