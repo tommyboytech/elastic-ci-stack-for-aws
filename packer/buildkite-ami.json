@@ -4,13 +4,13 @@
       "type": "amazon-ebs",
       "region": "us-west-2",
       "source_ami": "ami-51537029",
-      "instance_type": "i3.large",
+      "instance_type": "t3.xlarge",
       "spot_price": "auto",
       "spot_price_auto_product": "Linux/UNIX (Amazon VPC)",
       "ssh_username": "ubuntu",
       "ami_name": "buildkite-stack-{{isotime | clean_ami_name}}",
       "ami_description": "Buildkite Elastic Stack (Ubuntu Server 16.04 LTS w/ docker)",
-      "ami_groups": ["all"]
+      "ami_groups": []
     }
   ],
   "provisioners": [
@@ -23,6 +23,16 @@
       "type": "file",
       "source": "../plugins",
       "destination": "/tmp/plugins"
+    },
+    {
+      "type": "file",
+      "source": "../t3",
+      "destination": "/tmp/t3"
+    },
+    {
+      "type": "file",
+      "source": "conf/t3/crypto.pass",
+      "destination": "/tmp/crypto.pass"
     },
     {
       "type": "shell",
@@ -51,6 +61,11 @@
     {
       "type": "shell",
       "script": "scripts/install-git-lfs.sh"
+    },
+    {
+      "type": "shell",
+
+      "script": "scripts/install-tve.sh"
     }
   ]
 }

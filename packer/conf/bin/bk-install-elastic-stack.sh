@@ -17,7 +17,7 @@ on_error() {
 			--health-status Unhealthy || true
 	fi
 
-	/opt/aws/bin/cfn-signal \
+	/usr/local/bin/cfn-signal \
 		--region "$AWS_REGION" \
 		--stack "$BUILDKITE_STACK_NAME" \
 		--reason "Error on line $errorLine: $(tail -n 1 /var/log/elastic-stack.log)" \
@@ -100,9 +100,9 @@ chown buildkite-agent: /etc/buildkite-agent/buildkite-agent.cfg
 if [[ -n "${BUILDKITE_AUTHORIZED_USERS_URL}" ]] ; then
 	cat <<- EOF > /etc/cron.hourly/authorized_keys
 	/usr/local/bin/bk-fetch.sh "${BUILDKITE_AUTHORIZED_USERS_URL}" /tmp/authorized_keys
-	mv /tmp/authorized_keys /home/ec2-user/.ssh/authorized_keys
-	chmod 600 /home/ec2-user/.ssh/authorized_keys
-	chown ec2-user: /home/ec2-user/.ssh/authorized_keys
+	mv /tmp/authorized_keys /home/ubuntu/.ssh/authorized_keys
+	chmod 600 /home/ubuntu/.ssh/authorized_keys
+	chown ubuntu: /home/ubuntu/.ssh/authorized_keys
 	EOF
 
 	chmod +x /etc/cron.hourly/authorized_keys
@@ -145,7 +145,7 @@ for i in $(seq 1 "${BUILDKITE_AGENTS_PER_INSTANCE}"); do
 done
 
 # let the stack know that this host has been initialized successfully
-/opt/aws/bin/cfn-signal \
+/usr/local/bin/cfn-signal \
 	--region "$AWS_REGION" \
 	--stack "$BUILDKITE_STACK_NAME" \
 	--resource "AgentAutoScaleGroup" \
