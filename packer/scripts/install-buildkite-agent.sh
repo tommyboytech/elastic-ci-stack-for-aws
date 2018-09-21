@@ -51,7 +51,11 @@ sudo mkdir -p /var/lib/buildkite-agent/.ssh
 sudo chown -R buildkite-agent: /var/lib/buildkite-agent/.ssh
 sudo chmod 0700 /var/lib/buildkite-agent/.ssh
 sudo cp /tmp/conf/buildkite-agent/ssh/config /var/lib/buildkite-agent/.ssh/config
+sudo chown -R buildkite-agent: /var/lib/buildkite-agent/.ssh/config
 sudo chmod 0600 /var/lib/buildkite-agent/.ssh/config
+
+echo "Fixing permissions for buildkite agent..."
+sudo chown -R buildkite-agent: /var/lib/buildkite-agent
 
 echo "Adding systemd service template..."
 sudo cp /tmp/conf/buildkite-agent/systemd/buildkite-agent@.service /etc/systemd/system/buildkite-agent@.service
